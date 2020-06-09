@@ -30,18 +30,18 @@ event http_message_done(c: connection, is_orig: bool, stat: http_message_stat) {
     if (c?$http) {
         if (c$http$method == "NOTIFY") {
             if (c$id$resp_h !in Site::private_address_space && c$id$resp_h !in Site::local_nets && c$id$resp_h !in ignore_subnets) {
-                NOTICE([$note=CallStranger_UPnP_To_External_Host, $msg="Potential CVE-2020-12695 (CallStranger) exploitation success (UPnP NOTIFY to a non-RFC1918 or Local Address)"]);
+                NOTICE([$conn=c, $note=CallStranger_UPnP_To_External_Host, $msg="Potential CVE-2020-12695 (CallStranger) exploitation success (UPnP NOTIFY to a non-RFC1918 or Local Address)"]);
             } 
         } else if (c$http$method == "SUBSCRIBE" && c$http?$callback_header) {
             local value = c$http$callback_header;
             if (|value| > exfiltration_threshold && c$id$resp_h !in ignore_subnets) {
-                NOTICE([$note=CallStranger_Data_Exfiltration, $msg="Potential CVE-2020-12695 (CallStranger) data exfiltration (large amount of data in UPnP NOTIFY URI)"]);
+                NOTICE([$conn=c, $note=CallStranger_Data_Exfiltration, $msg="Potential CVE-2020-12695 (CallStranger) data exfiltration (large amount of data in UPnP NOTIFY URI)"]);
             } else {
                 local parsed_uri = decompose_uri(value);
                 if (parsed_uri?$netlocation) {
                     local netlocation_addr = to_addr(parsed_uri$netlocation);
                     if (netlocation_addr !in Site::private_address_space && netlocation_addr !in Site::local_nets && netlocation_addr !in ignore_subnets) {
-                        NOTICE([$note=CallStranger_UPnP_Callback_To_External_Host, $msg="Potential CVE-2020-12695 (CallStranger) exploitation attempt (Requested UPnP Callback to a non-RFC1918 or Local address)"]);
+                        NOTICE([$conn=c, $note=CallStranger_UPnP_Callback_To_External_Host, $msg="Potential CVE-2020-12695 (CallStranger) exploitation attempt (Requested UPnP Callback to a non-RFC1918 or Local address)"]);
                     }
                 }
             }
