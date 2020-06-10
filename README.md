@@ -8,6 +8,13 @@
 
  The module assumes that your site doesn't normally have UPnP SUBSCRIBE or NOTIFY commands destined for the Internet and that you don't have UPnP devices exposed to the Internet. If either of these things are true, you will see false positives. You can add particular IPs that create false positives to the `CallStrangerDetector::ignore_subnets` set to ignore them.
 
+## Usage
+### Standalone Mode
+To use this script against a PCAP, simply clone the Git repository and run Zeek with `zeek -Cr your.pcap scripts/__load__.zeek`
+
+### As a Package
+To install the package, clone the Git repository and execute `zkg install .` from the package directory
+
 ## Notice Types
  The module will add notices to `notice.log` if it detects CallStranger-like activity. The notices are as follows:
 * `CallStranger_Data_Exfiltration_Attempt`: Observed an attempt to have a UPnP device exfiltrate traffic
