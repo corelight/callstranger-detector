@@ -6,7 +6,7 @@
    2. UPnP `NOTIFY` commands that are destined for a non-RFC1918 or local_nets address. This could indicate active DDoS amplification or Data Exfiltration
    3. UPnP `SUBSCRIBE` commands with a Notify URL that is longer than `CallStrangerDetector::exfiltration_threshold` bytes. This could indicate data exfiltration over UPnP
 
- The module assumes that your site doesn't normally have UPnP SUBSCRIBE or NOTIFY commands destined for the Internet and that you don't have UPnP devices exposed to the Internet. If either of these things are true, you will see false positives. You can add particular IPs that create false positives to the `CallStrangerDetector::ignore_subnets` set to ignore them.
+ The module assumes that your site doesn't normally have UPnP `SUBSCRIBE` or `NOTIFY` commands destined for the Internet and that you don't have UPnP devices exposed to the Internet. If either of these things are true, you will see false positives. You can add particular IPs that create false positives to the `CallStrangerDetector::ignore_subnets` set to ignore them.
 
 ## Usage
 ### Standalone Mode
