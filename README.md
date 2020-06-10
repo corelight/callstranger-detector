@@ -1,6 +1,6 @@
-# Zeek Module that detects CallStranger (CVE-2020-12695) attempts: http://callstranger.com/
+# Zeek Plugin that detects CallStranger (CVE-2020-12695) attempts (http://callstranger.com/)
 
- This script attempts to detect CallStranger (CVE-2020-12695) exploitation attempts and data exfiltration. It does so by looking for three key things:
+ This plugin attempts to detect CallStranger (CVE-2020-12695) exploitation attempts and data exfiltration. It does so by looking for three key things:
 
    1. UPnP `SUBSCRIBE` commands with a Notify URL that contains an IP address that isn't an RFC1918 or local_nets address. This could be the precursor for DDoS amplification or Data Exfiltration
    2. UPnP `NOTIFY` commands that are destined for a non-RFC1918 or local_nets address. This could indicate active DDoS amplification or Data Exfiltration
