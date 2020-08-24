@@ -8,8 +8,6 @@
 
  The module assumes that your site doesn't normally have UPnP `SUBSCRIBE` or `NOTIFY` commands destined for the Internet and that you don't have UPnP devices exposed to the Internet. If either of these things are true, you will see false positives. You can add particular IPs that create false positives to the `CallStrangerDetector::ignore_subnets` set to ignore them.
 
-![Demo Animation](../assets/callstranger_example.gif?raw=true)
-
 ## Usage
 ### Standalone Mode
 To use this script against a PCAP, simply clone the Git repository and run Zeek with `zeek -Cr your.pcap scripts/__load__.zeek`
