@@ -33,7 +33,7 @@ export {
 }
 
 event http_message_done(c: connection, is_orig: bool, stat: http_message_stat) {
-    if (c?$http) {
+    if (c?$http && c$http?$method) {
         if (c$http$method == "NOTIFY") {
             if (c$id$resp_h !in Site::private_address_space && c$id$resp_h !in Site::local_nets && c$id$resp_h !in ignore_subnets) {
                 NOTICE([$conn=c, $note=CallStranger_UPnP_To_External_Host, $msg="Potential CVE-2020-12695 (CallStranger) exploitation success (UPnP NOTIFY to a non-RFC1918 or Local Address)"]);
