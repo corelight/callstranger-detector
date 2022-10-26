@@ -34,7 +34,7 @@ export {
   option strict_upnp_protocol_detection = F;
 }
 
-const no_addr = to_addr("0.0.0.0");
+const no_addr = 0.0.0.0;
 
 function process_ip(netlocation_addr: addr, value: string, c: connection) {
     if (netlocation_addr == no_addr) {
